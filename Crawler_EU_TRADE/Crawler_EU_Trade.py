@@ -58,7 +58,7 @@ class Crawler:
         sleep = time.sleep(3)
 
         # ----------> Filter by
-        self.driver.find_element_by_xpath(SEARCH).click()
+        self.driver.find_element_by_xpath(SEARCH_).click()
         self.driver.find_element_by_xpath(APPLY_FILTER).click()
         sleep
 
