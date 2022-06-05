@@ -4,6 +4,7 @@ import requests
 import selenium
 import time
 import urllib
+from config import *
 
 
 class Crawler:
@@ -27,22 +28,6 @@ class Crawler:
     def search_date_and_country(self) -> None:
         """This fuction insert and search in 
         The windows Search field: ONlY date and Country"""
-
-        # Settings
-        self.get_site()
-        SEARCH = "//div[@class='min_width_inner containsStatus']//div[@class='search_left ui-resizable']"
-
-        # Date
-        DATE_BAR = SEARCH + str("//li[@id='tabFordate_search']")
-        DATE_EXPIRATION = SEARCH + str(
-            "//div[@id='date_search_line_2']//input")
-        FIND_DATE = "//div[@id='date_search']//div[@class='searchButtonContainer bottom right']"
-
-        # Country
-        COUNTRY_BAR = SEARCH + str("//li[@id='tabForcountry_search']")
-        CHOSEN_COUNTRY = SEARCH + str(
-            "//div[@id='country_search_line_2']//input")
-        FIND_COUNTRY = "//div[@id='country_search']//div[@class='searchButtonContainer bottom right']"
 
         # ----------> wait for n seconds
         sleep = time.sleep(3)
@@ -72,18 +57,8 @@ class Crawler:
 
         sleep = time.sleep(3)
 
-        # Settings
-        FILTERBY = "//div[@class='min_width_inner containsStatus']//div[@class='search_right']"
-
-        # Filter
-        FILTER_TW = FILTERBY + f"//div[@class='facetCounts columns_4']//label[@for='{self.country_filter}']"
-        APPLY_FILTER = FILTERBY + str(
-            "//div[@id='source_filter']//a[@role='button'][1]//span[@class='ui-button-text']"
-        )
-
         # ----------> Filter by
-        self.driver.find_element_by_xpath(
-            "//*[@id='source_filter']/div[1]/div/div[6]/div/a[19]").click()
+        self.driver.find_element_by_xpath(SEARCH).click()
         self.driver.find_element_by_xpath(APPLY_FILTER).click()
         sleep
 
@@ -92,11 +67,6 @@ class Crawler:
 
         # ----------> wait for n seconds
         sleep = time.sleep(3)
-
-        # Settings
-        LIST = "//*[@id='results']/div[1]/div[2]/div[2]/span/div[2]/ul/li/a/span[2]"
-        LAST_ELEM = "//*[@id='results']/div[1]/div[2]/div[2]/span/div[2]/ul/li/ul/li[last()]"
-        PAG = "/html/body/div[4]/div[2]/form/div[3]/div[1]/div[2]/div[3]/div"
 
         # ----------> Move to number of rows
         self.driver.find_element_by_xpath(LIST).click()
